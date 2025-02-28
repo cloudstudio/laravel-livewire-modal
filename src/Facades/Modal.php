@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Facade for accessing modal functionality.
  *
- * @see \Cloudstudio\Modal\Modal
+ * @method static void openModal(string $component, array $arguments = [], array $modalAttributes = [])
+ * @method static void destroyComponent(string $id)
+ * @method static void resetState()
+ * 
+ * @see \Cloudstudio\Modal\ModalContainer
  */
 class Modal extends Facade
 {
@@ -18,6 +22,6 @@ class Modal extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Cloudstudio\Modal\Modal::class;
+        return \Cloudstudio\Modal\ModalContainer::class;
     }
 }

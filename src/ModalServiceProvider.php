@@ -4,10 +4,13 @@ namespace Cloudstudio\Modal;
 
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
+use Cloudstudio\Modal\Services\ModalEventService;
+use Cloudstudio\Modal\Services\ModalConfigService;
+use Cloudstudio\Modal\Services\ModalManagerService;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
- * @see \Cloudstudio\Modal\ModalServiceProvider
+ * Service provider for the Laravel Livewire Modal package.
  */
 class ModalServiceProvider extends PackageServiceProvider
 {
@@ -37,6 +40,16 @@ class ModalServiceProvider extends PackageServiceProvider
     }
 
     /**
+     * Register any package services.
+     *
+     * @return void
+     */
+    public function registeringPackage(): void
+    {
+        $this->registerServices();
+    }
+
+    /**
      * Register Livewire components.
      *
      * @return void
@@ -44,5 +57,25 @@ class ModalServiceProvider extends PackageServiceProvider
     protected function registerComponents(): void
     {
         Livewire::component('modal', ModalContainer::class);
+    }
+
+    /**
+     * Register package services.
+     *
+     * @return void
+     */
+    protected function registerServices(): void
+    {
+        $this->app->singleton(ModalConfigService::class, function ($app) {
+            return new ModalConfigService();
+        });
+
+        $this->app->singleton(ModalEventService::class, function ($app) {
+            return new ModalEventService();
+        });
+
+        $this->app->singleton(ModalManagerService::class, function ($app) {
+            return new ModalManagerService();
+        });
     }
 }
