@@ -2,7 +2,6 @@
 
 use Cloudstudio\Modal\Facades\Modal;
 use Cloudstudio\Modal\ModalContainer;
-use Cloudstudio\Modal\ModalServiceProvider;
 use Cloudstudio\Modal\Services\ModalConfigService;
 use Cloudstudio\Modal\Services\ModalEventService;
 use Cloudstudio\Modal\Services\ModalManagerService;

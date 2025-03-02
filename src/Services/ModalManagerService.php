@@ -20,10 +20,11 @@ class ModalManagerService
     /**
      * Create a new modal component instance.
      *
-     * @param string $component The component name
-     * @param array $arguments The component arguments
-     * @param array $modalAttributes Additional modal attributes
+     * @param  string  $component  The component name
+     * @param  array  $arguments  The component arguments
+     * @param  array  $modalAttributes  Additional modal attributes
      * @return array The modal component data
+     *
      * @throws Exception If the component is an abstract class
      */
     public function createModalComponent(string $component, array $arguments = [], array $modalAttributes = []): array
@@ -35,7 +36,7 @@ class ModalManagerService
             throw new Exception("[{$componentClass}] is an abstract class.");
         }
 
-        $id = md5($component . serialize($arguments));
+        $id = md5($component.serialize($arguments));
 
         $arguments = collect($arguments)
             ->merge($this->resolveComponentProps($arguments, new $componentClass))
@@ -55,15 +56,15 @@ class ModalManagerService
                     'maxWidth' => $componentClass::modalMaxWidth(),
                     'maxWidthClass' => $componentClass::modalMaxWidthClass(),
                 ], $modalAttributes),
-            ]
+            ],
         ];
     }
 
     /**
      * Resolve component properties.
      *
-     * @param array $attributes The attributes to resolve
-     * @param Component $component The component instance
+     * @param  array  $attributes  The attributes to resolve
+     * @param  Component  $component  The component instance
      * @return Collection The resolved properties
      */
     public function resolveComponentProps(array $attributes, Component $component): Collection
@@ -78,10 +79,11 @@ class ModalManagerService
     /**
      * Resolve a parameter value.
      *
-     * @param array $attributes The attributes array
-     * @param string $parameterName The parameter name
-     * @param string $parameterClassName The parameter class name
+     * @param  array  $attributes  The attributes array
+     * @param  string  $parameterName  The parameter name
+     * @param  string  $parameterClassName  The parameter class name
      * @return mixed The resolved parameter
+     *
      * @throws ModelNotFoundException If the model cannot be resolved
      */
     protected function resolveParameter(array $attributes, string $parameterName, string $parameterClassName)
@@ -112,7 +114,7 @@ class ModalManagerService
     /**
      * Get public property types for a component.
      *
-     * @param Component $component The component instance
+     * @param  Component  $component  The component instance
      * @return Collection The public property types
      */
     public function getPublicPropertyTypes(Component $component): Collection

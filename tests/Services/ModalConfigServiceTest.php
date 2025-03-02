@@ -16,7 +16,7 @@ it('returns default config values', function () {
         'destroy_on_close' => false,
     ]);
 
-    $service = new ModalConfigService();
+    $service = new ModalConfigService;
 
     expect($service->getModalMaxWidth())->toBe('test-width')
         ->and($service->shouldCloseModalOnClickAway())->toBeTrue()
@@ -38,7 +38,7 @@ it('returns custom config values', function () {
         'destroy_on_close' => true,
     ]);
 
-    $service = new ModalConfigService();
+    $service = new ModalConfigService;
 
     expect($service->getModalMaxWidth())->toBe('custom-width')
         ->and($service->shouldCloseModalOnClickAway())->toBeFalse()
@@ -50,7 +50,7 @@ it('returns custom config values', function () {
 
 // Test the getModalMaxWidthClass method
 it('returns correct CSS class for modal width', function () {
-    $service = new ModalConfigService();
+    $service = new ModalConfigService;
 
     // Test some sample widths
     expect($service->getModalMaxWidthClass('sm'))->toBe('sm:max-w-sm')
@@ -62,6 +62,6 @@ it('returns correct CSS class for modal width', function () {
 
 // Test invalid width throws exception
 it('throws exception for invalid width', function () {
-    $service = new ModalConfigService();
+    $service = new ModalConfigService;
     $service->getModalMaxWidthClass('invalid-width');
 })->throws(\InvalidArgumentException::class);

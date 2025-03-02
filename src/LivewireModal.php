@@ -14,43 +14,31 @@ abstract class LivewireModal extends Component
 {
     /**
      * Whether to force close the modal.
-     *
-     * @var bool
      */
     public bool $forceClose = false;
 
     /**
      * Number of previous modals to skip when closing.
-     *
-     * @var int
      */
     public int $skipModals = 0;
 
     /**
      * Whether to destroy skipped modals.
-     *
-     * @var bool
      */
     public bool $destroySkipped = false;
 
     /**
      * Modal config service instance.
-     *
-     * @var ModalConfigService|null
      */
     protected ?ModalConfigService $configService = null;
 
     /**
      * Modal event service instance.
-     *
-     * @var ModalEventService|null
      */
     protected ?ModalEventService $eventService = null;
 
     /**
      * Get the modal config service.
-     *
-     * @return ModalConfigService
      */
     protected function configService(): ModalConfigService
     {
@@ -63,8 +51,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Get the modal event service.
-     *
-     * @return ModalEventService
      */
     protected function eventService(): ModalEventService
     {
@@ -77,8 +63,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Mark skipped modals for destruction.
-     *
-     * @return self
      */
     public function destroySkippedModals(): self
     {
@@ -90,9 +74,8 @@ abstract class LivewireModal extends Component
     /**
      * Skip previous modals.
      *
-     * @param int $count Number of modals to skip
-     * @param bool $destroy Whether to destroy skipped modals
-     * @return self
+     * @param  int  $count  Number of modals to skip
+     * @param  bool  $destroy  Whether to destroy skipped modals
      */
     public function skipPreviousModals(int $count = 1, bool $destroy = false): self
     {
@@ -104,9 +87,8 @@ abstract class LivewireModal extends Component
     /**
      * Skip previous modal.
      *
-     * @param int $count Number of modals to skip
-     * @param bool $destroy Whether to destroy skipped modals
-     * @return self
+     * @param  int  $count  Number of modals to skip
+     * @param  bool  $destroy  Whether to destroy skipped modals
      */
     public function skipPreviousModal(int $count = 1, bool $destroy = false): self
     {
@@ -118,8 +100,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Force close the modal.
-     *
-     * @return self
      */
     public function forceClose(): self
     {
@@ -130,8 +110,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Close the modal.
-     *
-     * @return void
      */
     public function closeModal(): void
     {
@@ -141,8 +119,7 @@ abstract class LivewireModal extends Component
     /**
      * Close the modal with events.
      *
-     * @param array $events Events to emit
-     * @return void
+     * @param  array  $events  Events to emit
      */
     public function closeModalWithEvents(array $events): void
     {
@@ -151,8 +128,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Get the modal max width.
-     *
-     * @return string
      */
     public static function modalMaxWidth(): string
     {
@@ -162,7 +137,6 @@ abstract class LivewireModal extends Component
     /**
      * Get the modal max width CSS class.
      *
-     * @return string
      * @throws InvalidArgumentException If the max width is invalid
      */
     public static function modalMaxWidthClass(): string
@@ -172,8 +146,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Check if modal should close on click away.
-     *
-     * @return bool
      */
     public static function closeModalOnClickAway(): bool
     {
@@ -182,8 +154,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Check if modal should close on escape key.
-     *
-     * @return bool
      */
     public static function closeModalOnEscape(): bool
     {
@@ -192,8 +162,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Check if closing modal on escape is forceful.
-     *
-     * @return bool
      */
     public static function closeModalOnEscapeIsForceful(): bool
     {
@@ -202,8 +170,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Check if close event should be dispatched.
-     *
-     * @return bool
      */
     public static function dispatchCloseEvent(): bool
     {
@@ -212,8 +178,6 @@ abstract class LivewireModal extends Component
 
     /**
      * Check if modal should be destroyed on close.
-     *
-     * @return bool
      */
     public static function destroyOnClose(): bool
     {

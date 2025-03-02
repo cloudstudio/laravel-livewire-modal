@@ -4,7 +4,6 @@ namespace Cloudstudio\Modal\Tests\Services;
 
 use Cloudstudio\Modal\LivewireModal;
 use Cloudstudio\Modal\Services\ModalManagerService;
-use Illuminate\Support\Str;
 
 // Mock modal component for testing
 class ManagerTestComponent extends LivewireModal
@@ -33,7 +32,7 @@ beforeEach(function () {
 
 // Test createModalComponent creates the expected result
 it('creates modal component data', function () {
-    $service = new ModalManagerService();
+    $service = new ModalManagerService;
 
     $component = 'manager-test-component';
     $args = ['customName' => 'Custom Test Name'];

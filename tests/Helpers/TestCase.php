@@ -14,7 +14,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn(string $modelName) => 'Cloudstudio\\Modal\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Cloudstudio\\Modal\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         // Set up app key for encryption
-        $app['config']->set('app.key', 'base64:' . base64_encode(
+        $app['config']->set('app.key', 'base64:'.base64_encode(
             'Cloudstudio\Modal\Tests\Helpers\TestCase'
         ));
 

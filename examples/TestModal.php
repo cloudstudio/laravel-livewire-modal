@@ -9,16 +9,11 @@ class TestModal extends LivewireModal
 {
     /**
      * Example public property
-     *
-     * @var string
      */
     public string $message = 'Hello from the modal!';
 
     /**
      * Initialize the component
-     *
-     * @param string|null $customMessage
-     * @return void
      */
     public function mount(?string $customMessage = null): void
     {
@@ -29,8 +24,6 @@ class TestModal extends LivewireModal
 
     /**
      * Close the modal with a custom event
-     *
-     * @return void
      */
     public function confirm(): void
     {
@@ -41,8 +34,6 @@ class TestModal extends LivewireModal
 
     /**
      * Simply close the modal
-     *
-     * @return void
      */
     public function cancel(): void
     {
@@ -51,8 +42,6 @@ class TestModal extends LivewireModal
 
     /**
      * Override the default modal width
-     *
-     * @return string
      */
     public static function modalMaxWidth(): string
     {
@@ -61,8 +50,6 @@ class TestModal extends LivewireModal
 
     /**
      * Render the component
-     *
-     * @return View
      */
     public function render(): View
     {
