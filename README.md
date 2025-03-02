@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cloudstudio/laravel-livewire-modal.svg?style=flat-square)](https://packagist.org/packages/cloudstudio/laravel-livewire-modal)
 [![Total Downloads](https://img.shields.io/packagist/dt/cloudstudio/laravel-livewire-modal.svg?style=flat-square)](https://packagist.org/packages/cloudstudio/laravel-livewire-modal)
 
-This package is a fork of [wire-elements/modal](https://github.com/wire-elements/modal), rebuilt with full support for Livewire v3 and Tailwind 4. It provides a powerful Livewire component that gives you a modal system that supports multiple child modals while maintaining state.
+This package is inspired by [wire-elements/modal](https://github.com/wire-elements/modal), forked and rebuilt from scratch to provide full support for Livewire v3 and Tailwind 4. It provides a powerful Livewire component that gives you a modal system that supports multiple child modals while maintaining state.
 
 ## Features
 
@@ -299,7 +299,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 - [Toni Soriano](https://github.com/cloudstudio)
 - [All Contributors](../../contributors)
-- This package is a fork of [wire-elements/modal](https://github.com/wire-elements/modal)
+- [wire-elements/modal](https://github.com/wire-elements/modal)
 
 ## License
 
