@@ -2,11 +2,11 @@
 
 namespace Cloudstudio\Modal;
 
+use Cloudstudio\Modal\Services\ModalConfigService;
+use Cloudstudio\Modal\Services\ModalEventService;
+use Cloudstudio\Modal\Services\ModalManagerService;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
-use Cloudstudio\Modal\Services\ModalEventService;
-use Cloudstudio\Modal\Services\ModalConfigService;
-use Cloudstudio\Modal\Services\ModalManagerService;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
@@ -16,9 +16,6 @@ class ModalServiceProvider extends PackageServiceProvider
 {
     /**
      * Configure the package.
-     *
-     * @param  \Spatie\LaravelPackageTools\Package  $package
-     * @return void
      */
     public function configurePackage(Package $package): void
     {
@@ -31,8 +28,6 @@ class ModalServiceProvider extends PackageServiceProvider
 
     /**
      * Perform post-registration booting.
-     *
-     * @return void
      */
     public function bootingPackage(): void
     {
@@ -41,8 +36,6 @@ class ModalServiceProvider extends PackageServiceProvider
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function registeringPackage(): void
     {
@@ -51,8 +44,6 @@ class ModalServiceProvider extends PackageServiceProvider
 
     /**
      * Register Livewire components.
-     *
-     * @return void
      */
     protected function registerComponents(): void
     {
@@ -61,21 +52,19 @@ class ModalServiceProvider extends PackageServiceProvider
 
     /**
      * Register package services.
-     *
-     * @return void
      */
     protected function registerServices(): void
     {
         $this->app->singleton(ModalConfigService::class, function ($app) {
-            return new ModalConfigService();
+            return new ModalConfigService;
         });
 
         $this->app->singleton(ModalEventService::class, function ($app) {
-            return new ModalEventService();
+            return new ModalEventService;
         });
 
         $this->app->singleton(ModalManagerService::class, function ($app) {
-            return new ModalManagerService();
+            return new ModalManagerService;
         });
     }
 }

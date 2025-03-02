@@ -21,8 +21,8 @@ class ModalEventTestComponent extends LivewireModal
 
 // Test closeModal method dispatches the correct events
 it('dispatches close modal event', function () {
-    $service = new ModalEventService();
-    $component = new ModalEventTestComponent();
+    $service = new ModalEventService;
+    $component = new ModalEventTestComponent;
 
     // This is difficult to test as it dispatches events
     // Just ensure it doesn't throw any exceptions
@@ -33,8 +33,8 @@ it('dispatches close modal event', function () {
 
 // Test closeModalWithEvents method with different event types
 it('handles different event types correctly', function () {
-    $service = new ModalEventService();
-    $component = new ModalEventTestComponent();
+    $service = new ModalEventService;
+    $component = new ModalEventTestComponent;
 
     // Test with various event types
     $events = [

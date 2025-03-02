@@ -40,8 +40,9 @@ class ModalConfigService
     /**
      * Get the modal max width CSS class.
      *
-     * @param string $maxWidth The max width key
+     * @param  string  $maxWidth  The max width key
      * @return string The CSS class for the max width
+     *
      * @throws InvalidArgumentException If the max width is invalid
      */
     public function getModalMaxWidthClass(string $maxWidth): string

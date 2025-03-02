@@ -12,29 +12,21 @@ class ModalContainer extends Component
 {
     /**
      * The active component ID.
-     *
-     * @var string|null
      */
     public ?string $activeComponent = null;
 
     /**
      * The components array.
-     *
-     * @var array
      */
     public array $components = [];
 
     /**
      * The modal manager service.
-     *
-     * @var ModalManagerService|null
      */
     protected ?ModalManagerService $managerService = null;
 
     /**
      * Get the modal manager service.
-     *
-     * @return ModalManagerService
      */
     protected function managerService(): ModalManagerService
     {
@@ -47,8 +39,6 @@ class ModalContainer extends Component
 
     /**
      * Reset the state.
-     *
-     * @return void
      */
     public function resetState(): void
     {
@@ -59,10 +49,9 @@ class ModalContainer extends Component
     /**
      * Open a modal.
      *
-     * @param string $component The component name
-     * @param array $arguments The component arguments
-     * @param array $modalAttributes Additional modal attributes
-     * @return void
+     * @param  string  $component  The component name
+     * @param  array  $arguments  The component arguments
+     * @param  array  $modalAttributes  Additional modal attributes
      */
     public function openModal(string $component, array $arguments = [], array $modalAttributes = []): void
     {
@@ -77,8 +66,7 @@ class ModalContainer extends Component
     /**
      * Destroy a component.
      *
-     * @param string $id The component ID
-     * @return void
+     * @param  string  $id  The component ID
      */
     public function destroyComponent(string $id): void
     {
@@ -87,8 +75,6 @@ class ModalContainer extends Component
 
     /**
      * Get the listeners.
-     *
-     * @return array
      */
     public function getListeners(): array
     {
@@ -100,13 +86,11 @@ class ModalContainer extends Component
 
     /**
      * Render the modal container.
-     *
-     * @return \Illuminate\View\View
      */
     public function render(): \Illuminate\View\View
     {
         return view('laravel-livewire-modal::modal', [
-            'modalScript' => __DIR__ . '/../dist/modal.js',
+            'modalScript' => __DIR__.'/../dist/modal.js',
         ]);
     }
 }

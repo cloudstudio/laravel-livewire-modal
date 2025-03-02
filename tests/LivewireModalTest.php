@@ -9,8 +9,11 @@ use Mockery;
 class EventModalComponent extends LivewireModal
 {
     public string $testProp = 'test';
+
     public bool $forceClose = false;
+
     public int $skipModals = 0;
+
     public bool $destroySkipped = false;
 
     public function close()
@@ -108,7 +111,7 @@ it('can override default configuration', function () {
 
 // Test skipPreviousModal method
 it('can skip previous modals', function () {
-    $component = new EventModalComponent();
+    $component = new EventModalComponent;
 
     // Skip one modal
     $component->skipPreviousModal();
@@ -123,7 +126,7 @@ it('can skip previous modals', function () {
 
 // Test skipPreviousModals method
 it('can skip multiple previous modals', function () {
-    $component = new EventModalComponent();
+    $component = new EventModalComponent;
 
     // Skip multiple modals
     $component->skipPreviousModals(3);
@@ -137,7 +140,7 @@ it('can skip multiple previous modals', function () {
 
 // Test destroySkippedModals method
 it('can mark skipped modals for destruction', function () {
-    $component = new EventModalComponent();
+    $component = new EventModalComponent;
 
     $component->destroySkippedModals();
     expect($component->destroySkipped)->toBeTrue();
@@ -145,7 +148,7 @@ it('can mark skipped modals for destruction', function () {
 
 // Test forceClose method
 it('can force close the modal', function () {
-    $component = new EventModalComponent();
+    $component = new EventModalComponent;
 
     $component->forceClose();
     expect($component->forceClose)->toBeTrue();
@@ -160,7 +163,7 @@ it('calls the event service when closing a modal', function () {
 
     app()->instance(ModalEventService::class, $mockEventService);
 
-    $component = new EventModalComponent();
+    $component = new EventModalComponent;
     $component->closeModal();
 
     // Mockery will verify the expectations when we close it
@@ -180,7 +183,7 @@ it('calls the event service when closing a modal with events', function () {
 
     app()->instance(ModalEventService::class, $mockEventService);
 
-    $component = new EventModalComponent();
+    $component = new EventModalComponent;
     $component->closeModalWithEvents($events);
 
     // Mockery will verify the expectations when we close it
