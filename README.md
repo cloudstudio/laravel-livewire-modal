@@ -1,19 +1,21 @@
-# This is my package laravel-livewire-modal
+# Laravel Livewire Modal
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cloudstudio/laravel-livewire-modal.svg?style=flat-square)](https://packagist.org/packages/cloudstudio/laravel-livewire-modal)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/cloudstudio/laravel-livewire-modal/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/cloudstudio/laravel-livewire-modal/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/cloudstudio/laravel-livewire-modal/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/cloudstudio/laravel-livewire-modal/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/cloudstudio/laravel-livewire-modal.svg?style=flat-square)](https://packagist.org/packages/cloudstudio/laravel-livewire-modal)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package is a fork of [wire-elements/modal](https://github.com/wire-elements/modal), rebuilt with full support for Livewire v3 and Tailwind 4. It provides a powerful Livewire component that gives you a modal system that supports multiple child modals while maintaining state.
 
-## Support us
+## Features
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-livewire-modal.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-livewire-modal)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+- 🚀 Fully compatible with Livewire v3
+- 🎨 Styled with Tailwind 4
+- 🔄 Maintains component state between modal interactions
+- 📦 Support for nested/stacked modals
+- 🛡️ Secure handling of data
+- ⚡ Optimized performance
+- 🔧 Highly customizable
 
 ## Installation
 
@@ -23,38 +25,267 @@ You can install the package via composer:
 composer require cloudstudio/laravel-livewire-modal
 ```
 
-You can publish and run the migrations with:
+After installing the package, you need to include the modal component in your blade layout file:
 
-```bash
-php artisan vendor:publish --tag="laravel-livewire-modal-migrations"
-php artisan migrate
+```php
+<livewire:modal />
 ```
 
-You can publish the config file with:
+## Basic Usage
+
+### Creating a Modal Component
+
+Create a Livewire component that extends the `LivewireModal` class:
+
+```php
+<?php
+
+namespace App\Livewire;
+
+use Cloudstudio\Modal\LivewireModal;
+use Illuminate\View\View;
+
+class CreateUser extends LivewireModal
+{
+    public $name = '';
+    public $email = '';
+    
+    protected $rules = [
+        'name' => 'required|min:3',
+        'email' => 'required|email',
+    ];
+    
+    public function create()
+    {
+        $this->validate();
+        
+        $user = User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt('password'),
+        ]);
+        
+        $this->closeModal();
+        
+        // Optionally emit events when the modal is closed
+        $this->dispatch('userCreated', $user->id);
+    }
+    
+    public function render(): View
+    {
+        return view('livewire.create-user');
+    }
+}
+```
+
+### Opening a Modal
+
+To open a modal from a Livewire component or a Blade view:
+
+```html
+<!-- From a button using onclick -->
+<button onclick="Livewire.dispatch('openModal', { component: 'create-user' })">Create User</button>
+
+<!-- From a Livewire component using wire:click -->
+<button wire:click="$dispatch('openModal', { component: 'create-user' })">Create User</button>
+
+<!-- With arguments -->
+<button onclick="Livewire.dispatch('openModal', { component: 'edit-user', arguments: { user: {{ $user->id }} } })">
+    Edit User
+</button>
+```
+
+### Handling Arguments
+
+You can pass arguments to your modal when opening it:
+
+```php
+public User $user;
+
+public function mount(User $user)
+{
+    $this->user = $user;
+    $this->name = $user->name;
+    $this->email = $user->email;
+}
+```
+
+### Modal Events
+
+You can dispatch events when closing a modal:
+
+```php
+public function update()
+{
+    $this->validate();
+    
+    $this->user->update([
+        'name' => $this->name,
+        'email' => $this->email,
+    ]);
+    
+    $this->closeModalWithEvents([
+        'userUpdated', // Event name
+        'userUpdated' => $this->user->id, // Event with data
+        UserOverview::class => 'userModified', // Component event
+        UserOverview::class => ['userModified', [$this->user->id]], // Component event with parameters
+    ]);
+}
+```
+
+## Customizing Modal Behavior
+
+### Changing Modal Width
+
+You can change the width of the modal by overriding the `modalMaxWidth` method:
+
+```php
+/**
+ * Supported sizes: 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'
+ */
+public static function modalMaxWidth(): string
+{
+    return 'xl';
+}
+```
+
+### Disable Closing on Escape Key
+
+To prevent the modal from closing when the escape key is pressed:
+
+```php
+public static function closeModalOnEscape(): bool
+{
+    return false;
+}
+```
+
+### Disable Closing on Outside Click
+
+To prevent the modal from closing when clicking outside:
+
+```php
+public static function closeModalOnClickAway(): bool
+{
+    return false;
+}
+```
+
+### Controlling Escape Key Behavior
+
+By default, pressing escape closes all modals. To change this behavior:
+
+```php
+public static function closeModalOnEscapeIsForceful(): bool
+{
+    return false;
+}
+```
+
+### Triggering Close Events
+
+To dispatch an event when the modal is closed:
+
+```php
+public static function dispatchCloseEvent(): bool
+{
+    return true;
+}
+```
+
+### Component State Management
+
+To destroy the component state when a modal is closed:
+
+```php
+public static function destroyOnClose(): bool
+{
+    return true;
+}
+```
+
+## Advanced Usage
+
+### Preventing Modal Close Based on State
+
+You can prevent the modal from closing based on its state:
+
+```php
+@script
+<script>
+    $wire.on('closingModalOnEscape', data => {
+        if ($wire.isDirty && !confirm('{{ __('You have unsaved changes. Are you sure you want to close this dialog?') }}')) {
+            data.closing = false;
+        }
+    });
+    $wire.on('closingModalOnClickAway', data => {
+        if ($wire.isDirty && !confirm('{{ __('You have unsaved changes. Are you sure you want to close this dialog?') }}')) {
+            data.closing = false;
+        }
+    });
+</script>
+@endscript
+```
+
+### Skipping Previous Modals
+
+For nested modal workflows where you want to skip returning to certain previous modals:
+
+```php
+public function delete()
+{
+    // Delete logic here
+    
+    // Skip the previous modal and close with events
+    $this->skipPreviousModal()->closeModalWithEvents([
+        TeamOverview::class => 'teamDeleted'
+    ]);
+    
+    // Or skip multiple previous modals
+    // $this->skipPreviousModals(2)->closeModal();
+    
+    // Optionally destroy the skipped modals' state
+    // $this->destroySkippedModals();
+}
+```
+## Configuration
+
+Publish the configuration file:
 
 ```bash
 php artisan vendor:publish --tag="laravel-livewire-modal-config"
 ```
 
-This is the contents of the published config file:
+This will create a `livewire-modal.php` config file with the following options:
 
 ```php
+<?php
+
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Modal Component Defaults
+    |--------------------------------------------------------------------------
+    |
+    | Configure the default properties for a modal component.
+    |
+    | Supported modal_max_width
+    | 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'
+    */
+    'component_defaults' => [
+        'modal_max_width' => '2xl',
+        'close_modal_on_click_away' => true,
+        'close_modal_on_escape' => true,
+        'close_modal_on_escape_is_forceful' => true,
+        'dispatch_close_event' => false,
+        'destroy_on_close' => false,
+    ],
 ];
 ```
 
-Optionally, you can publish the views using
+## Security
 
-```bash
-php artisan vendor:publish --tag="laravel-livewire-modal-views"
-```
-
-## Usage
-
-```php
-$modal = new Cloudstudio\Modal();
-echo $modal->echoPhrase('Hello, Cloudstudio!');
-```
+Remember to validate all data passed to your Livewire components. Since Livewire stores this information on the client-side, it can be manipulated. Use Laravel's Gate facade and other authorization mechanisms to secure your application.
 
 ## Testing
 
@@ -66,18 +297,11 @@ composer test
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
 ## Credits
 
 - [Toni Soriano](https://github.com/cloudstudio)
 - [All Contributors](../../contributors)
+- This package is a fork of [wire-elements/modal](https://github.com/wire-elements/modal)
 
 ## License
 

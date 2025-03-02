@@ -45,7 +45,6 @@ class ModalManagerService
             'id' => $id,
             'data' => [
                 'name' => $component,
-                'attributes' => $arguments, // Deprecated
                 'arguments' => $arguments,
                 'modalAttributes' => array_merge([
                     'closeOnClickAway' => $componentClass::closeModalOnClickAway(),
