@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     build: {
-        outDir: 'resources/dist',
+        outDir: 'dist',
         rollupOptions: {
             input: [
                 'resources/js/modal.js',

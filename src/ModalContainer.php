@@ -90,7 +90,7 @@ class ModalContainer extends Component
     public function render(): \Illuminate\View\View
     {
         return view('laravel-livewire-modal::modal', [
-            'modalScript' => __DIR__.'/../dist/modal.js',
+            'modalScript' => __DIR__ . '/../dist/modal.js',
         ]);
     }
 }
