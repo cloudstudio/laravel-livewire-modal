@@ -269,7 +269,7 @@ public function delete()
 Publish the configuration file:
 
 ```bash
-php artisan vendor:publish --tag="laravel-livewire-modal-config"
+php artisan vendor:publish --tag=livewire-modal-config
 ```
 
 This will create a `livewire-modal.php` config file with the following options:
