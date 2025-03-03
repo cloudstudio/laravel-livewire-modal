@@ -21,7 +21,7 @@ class ModalServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-livewire-modal')
-            ->hasConfigFile()
+            ->hasConfigFile('livewire-modal')
             ->hasViews('laravel-livewire-modal')
             ->hasAssets();
     }

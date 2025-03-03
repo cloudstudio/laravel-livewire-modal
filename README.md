@@ -29,6 +29,23 @@ After installing the package, you need to include the modal component in your bl
 <livewire:modal />
 ```
 
+## Tailwind Configuration
+
+To properly configure Tailwind 4 with this package, add these lines to your `app.css` file:
+
+```css
+@source '../../vendor/cloudstudio/laravel-livewire-modal/resources/views/**/*.blade.php';
+@source '../../vendor/cloudstudio/laravel-livewire-modal/src/Services/ModalConfigService.php';
+```
+
+Then run:
+
+```bash
+yarn build
+```
+
+This ensures Tailwind can properly scan and generate the necessary styles for the modal components.
+
 ## Basic Usage
 
 ### Creating a Modal Component
@@ -246,6 +263,7 @@ public function delete()
     // $this->destroySkippedModals();
 }
 ```
+
 ## Configuration
 
 Publish the configuration file:
@@ -304,3 +322,4 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
