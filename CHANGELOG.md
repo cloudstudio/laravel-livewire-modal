@@ -2,9 +2,14 @@
 
 All notable changes to `laravel-livewire-modal` will be documented in this file.
 
+## v1.0.3 - 2025-03-03
+
+**Full Changelog**: https://github.com/cloudstudio/laravel-livewire-modal/compare/v.1.0.1...v1.0.3
+
 ## v.1.0.2 - 2023-03-03
 
 ### Fixed
+
 - Fixed asset path issue where modal.js couldn't be found
 - Simplified build process to output assets directly to the correct location
 
