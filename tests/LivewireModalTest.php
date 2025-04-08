@@ -78,6 +78,27 @@ class CustomConfigModalComponent extends LivewireModal
     }
 }
 
+// Test modal component with custom flyout configuration
+class FlyoutModalComponent extends LivewireModal
+{
+    public static function modalFlyout(): bool
+    {
+        return true;
+    }
+
+    public static function modalFlyoutPosition(): string
+    {
+        return 'right';
+    }
+
+    public function render()
+    {
+        return <<<'blade'
+        <div>Flyout config modal</div>
+        blade;
+    }
+}
+
 // Test the default configuration methods
 it('has default configuration values', function () {
     $defaultConfig = app(ModalConfigService::class);
@@ -88,7 +109,9 @@ it('has default configuration values', function () {
         ->and(EventModalComponent::closeModalOnEscape())->toBe($defaultConfig->shouldCloseModalOnEscape())
         ->and(EventModalComponent::closeModalOnEscapeIsForceful())->toBe($defaultConfig->isCloseModalOnEscapeForceful())
         ->and(EventModalComponent::dispatchCloseEvent())->toBe($defaultConfig->shouldDispatchCloseEvent())
-        ->and(EventModalComponent::destroyOnClose())->toBe($defaultConfig->shouldDestroyOnClose());
+        ->and(EventModalComponent::destroyOnClose())->toBe($defaultConfig->shouldDestroyOnClose())
+        ->and(EventModalComponent::modalFlyout())->toBe($defaultConfig->shouldDisplayAsFlyout())
+        ->and(EventModalComponent::modalFlyoutPosition())->toBe($defaultConfig->getFlyoutPosition());
 });
 
 // Test modal max width class
@@ -107,6 +130,12 @@ it('can override default configuration', function () {
         ->and(CustomConfigModalComponent::closeModalOnEscapeIsForceful())->toBeFalse()
         ->and(CustomConfigModalComponent::dispatchCloseEvent())->toBeTrue()
         ->and(CustomConfigModalComponent::destroyOnClose())->toBeTrue();
+});
+
+// Test custom flyout configuration
+it('can override flyout configuration', function () {
+    expect(FlyoutModalComponent::modalFlyout())->toBeTrue()
+        ->and(FlyoutModalComponent::modalFlyoutPosition())->toBe('right');
 });
 
 // Test skipPreviousModal method
