@@ -55,6 +55,8 @@ class ModalManagerService
                     'destroyOnClose' => $componentClass::destroyOnClose(),
                     'maxWidth' => $componentClass::modalMaxWidth(),
                     'maxWidthClass' => $componentClass::modalMaxWidthClass(),
+                    'modalFlyout' => $componentClass::modalFlyout(),
+                    'modalFlyoutPosition' => $componentClass::modalFlyoutPosition(),
                 ], $modalAttributes),
             ],
         ];
