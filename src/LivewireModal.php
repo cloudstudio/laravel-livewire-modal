@@ -144,6 +144,26 @@ abstract class LivewireModal extends Component
         return app(ModalConfigService::class)->getModalMaxWidthClass(static::modalMaxWidth());
     }
 
+     /**
+     * Get the modal variant.
+     *
+     * @return string
+     */
+    public static function modalFlyout(): bool
+    {
+        return app(ModalConfigService::class)->shouldDisplayAsFlyout();
+    }
+
+    /**
+     * Get the modal flyout position.
+     *
+     * @return string
+     */
+    public static function modalFlyoutPosition(): string
+    {
+        return app(ModalConfigService::class)->getFlyoutPosition();
+    }
+
     /**
      * Check if modal should close on click away.
      */

@@ -17,16 +17,60 @@
 
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-            <div x-show="show && showActiveComponent" x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-bind:class="modalWidth"
-                class="inline-block w-full align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full"
-                id="modal-container" x-trap.noscroll.inert="show && showActiveComponent" aria-modal="true">
+            {{-- Default Modal --}}
+            <div x-show="show && showActiveComponent && !modalFlyout"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-bind:class="modalWidth"
+                    class="inline-block w-full align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform
+                     transition-all sm:my-8 sm:align-middle sm:w-full"
+                    id="modal-container" x-trap.noscroll="show && showActiveComponent && !modalFlyout" aria-modal="true">
+                @include('laravel-livewire-modal::modal-content')
+            </div>
 
+            {{-- Flyout Right --}}
+            <div x-show="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'right'"
+                 x-transition:enter="transform transition ease-in-out duration-300"
+                 x-transition:enter-start="translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transform transition ease-in-out duration-300"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="translate-x-full"
+                 x-bind:class="[modalWidth, 'fixed h-full md:w-[25rem] top-0 right-0 border-s overflow-y-auto overflow-x-hidden
+                  z-50 shadow-2xl modal-flyout-right bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 transform transition-all']"
+                 id="modal-container-right" x-trap.noscroll="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'right'" aria-modal="true">
+                @include('laravel-livewire-modal::modal-content')
+            </div>
+
+            {{-- Flyout Left --}}
+            <div x-show="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'left'"
+                 x-transition:enter="transform transition ease-in-out duration-300"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transform transition ease-in-out duration-300"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 x-bind:class="[modalWidth, 'fixed h-full md:w-[25rem] top-0 left-0 border-e overflow-y-auto overflow-x-hidden 
+                 z-50 shadow-2xl modal-flyout-left bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 transform transition-all']"
+                 id="modal-container-left" x-trap.noscroll="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'left'" aria-modal="true">
+                @include('laravel-livewire-modal::modal-content')
+            </div>
+
+            {{-- Flyout Bottom --}}
+            <div x-show="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'bottom'"
+                 x-transition:enter="transform transition ease-in-out duration-300"
+                 x-transition:enter-start="translate-y-full"
+                 x-transition:enter-end="translate-y-0"
+                 x-transition:leave="transform transition ease-in-out duration-300"
+                 x-transition:leave-start="translate-y-0"
+                 x-transition:leave-end="translate-y-full"
+                 x-bind:class="[modalWidth, 'fixed min-h-[25rem] w-screen min-w-[100vw] bottom-0 left-0 right-0 border-t overflow-y-auto overflow-x-hidden
+                  z-50 shadow-2xl modal-flyout-bottom bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 transform transition-all']"
+                 id="modal-container-bottom" x-trap.noscroll="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'bottom'" aria-modal="true">
                 @include('laravel-livewire-modal::modal-content')
             </div>
         </div>

@@ -65,3 +65,30 @@ it('throws exception for invalid width', function () {
     $service = new ModalConfigService;
     $service->getModalMaxWidthClass('invalid-width');
 })->throws(\InvalidArgumentException::class);
+
+
+// Test the config service with custom values
+it('flyout custom config values', function () {
+    // Setup test config
+    config()->set('livewire-modal.component_defaults', [
+        'modal_max_width' => 'custom-width',
+        'display_as_flyout' => true,
+        'flyout_position' => 'left',
+        'close_modal_on_click_away' => false,
+        'close_modal_on_escape' => false,
+        'close_modal_on_escape_is_forceful' => false,
+        'dispatch_close_event' => true,
+        'destroy_on_close' => true,
+    ]);
+
+    $service = new ModalConfigService;
+
+    expect($service->getModalMaxWidth())->toBe('custom-width')
+        ->and($service->shouldCloseModalOnClickAway())->toBeFalse()
+        ->and($service->shouldCloseModalOnEscape())->toBeFalse()
+        ->and($service->isCloseModalOnEscapeForceful())->toBeFalse()
+        ->and($service->shouldDispatchCloseEvent())->toBeTrue()
+        ->and($service->shouldDestroyOnClose())->toBeTrue()
+        ->and($service->shouldDisplayAsFlyout())->toBeTrue()
+        ->and($service->getFlyoutPosition())->toBe('left');
+});
