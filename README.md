@@ -34,8 +34,7 @@ After installing the package, you need to include the modal component in your bl
 To properly configure Tailwind 4 with this package, add these lines to your `app.css` file:
 
 ```css
-@source '../../vendor/cloudstudio/laravel-livewire-modal/resources/views/**/*.blade.php';
-@source '../../vendor/cloudstudio/laravel-livewire-modal/src/Services/ModalConfigService.php';
+@source '../../vendor/cloudstudio/laravel-livewire-modal/dist/modal.css';
 ```
 
 Then run:
@@ -161,6 +160,30 @@ You can change the width of the modal by overriding the `modalMaxWidth` method:
 public static function modalMaxWidth(): string
 {
     return 'xl';
+}
+```
+
+### Display as Flyout
+
+To display the modal as a flyout:
+
+```php
+public static function modalFlyout(): bool
+{
+    return true;
+}
+```
+
+### Flyout Position
+
+To change the position of the flyout. 
+Available positions are `right`, `left`, and `bottom`.
+Default is `right`:
+
+```php
+public static function modalFlyoutPosition(): string
+{
+    return 'left';
 }
 ```
 

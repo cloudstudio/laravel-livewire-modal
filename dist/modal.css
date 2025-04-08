@@ -1,0 +1,1 @@
+@source "../resources/views/*.blade.php";@source inline("sm:max-w-sm");@source inline("sm:max-w-md");@source inline("md:max-w-lg");@source inline("md:max-w-xl");@source inline("lg:max-w-2xl");@source inline("lg:max-w-3xl");@source inline("xl:max-w-4xl");@source inline("xl:max-w-5xl");@source inline("2xl:max-w-6xl");@source inline("2xl:max-w-7xl");

@@ -71,6 +71,26 @@ class ModalConfigService
     }
 
     /**
+     * Check if modal should be displayed as a flyout.
+     *
+     * @return bool Whether to display modal as a flyout
+     */
+    public function shouldDisplayAsFlyout(): bool
+    {
+        return config('livewire-modal.component_defaults.display_as_flyout', false);
+    }
+
+    /** 
+     * Get the flyout position.
+     *
+     * @return string The flyout position
+     */
+    public function getFlyoutPosition(): string
+    {
+        return config('livewire-modal.component_defaults.flyout_position', 'right');
+    }
+
+    /**
      * Check if modal should close on click away.
      *
      * @return bool Whether to close modal on click away

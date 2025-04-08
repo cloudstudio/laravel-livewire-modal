@@ -6,6 +6,7 @@ export default defineConfig({
         rollupOptions: {
             input: [
                 'resources/js/modal.js',
+                'resources/css/modal.css',
             ],
             output: {
                 entryFileNames: '[name].js',
