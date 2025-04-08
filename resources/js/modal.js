@@ -157,8 +157,8 @@ window.LivewireUIModal = () => {
                     this.activeComponent = id;
                     this.showActiveComponent = true;
                     this.modalWidth = this.getActiveComponentModalAttribute('maxWidthClass');
-                    this.modalFlyout = this.getActiveComponentModalAttribute('displayAsFlyout');
-                    this.modalFlyoutPosition = this.getActiveComponentModalAttribute('flyoutPosition');
+                    this.modalFlyout = this.getActiveComponentModalAttribute('modalFlyout');
+                    this.modalFlyoutPosition = this.getActiveComponentModalAttribute('modalFlyoutPosition');
                 }, 300);
             }
 
