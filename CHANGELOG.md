@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-livewire-modal` will be documented in this file.
 
+## v1.0.6 - 2025-04-08
+
+### What's Changed
+
+* Fix showing flyout by @Krato in https://github.com/cloudstudio/laravel-livewire-modal/pull/2
+
+**Full Changelog**: https://github.com/cloudstudio/laravel-livewire-modal/compare/v1.0.5...v1.0.6
+
 ## v1.0.5 - 2025-04-08
 
 ### What's Changed
