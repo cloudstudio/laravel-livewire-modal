@@ -85,6 +85,31 @@ class ModalContainer extends Component
     }
 
     /**
+     * Should show modal.
+     *
+     * @param  array  $componentAttributes  The component attributes
+     * @param  bool  $modalFlyout  Whether the modal is a flyout
+     * @param  string|null  $modalFlyoutPosition  The modal flyout position
+     * @return bool Whether the modal should be shown
+     */
+    public function shouldShowModal(array $componentAttributes, bool $modalFlyout, ?string $modalFlyoutPosition = null): bool
+    {
+        // Si no es un flyout, verifica que el componente tampoco lo sea
+        if (!$modalFlyout) {
+            return !($componentAttributes['modalFlyout'] ?? false);
+        }
+
+        $attributesFlyoutPosition = $componentAttributes['modalFlyoutPosition'] ?? null;
+
+        return match ($modalFlyoutPosition) {
+            'right' => $attributesFlyoutPosition === $modalFlyoutPosition,
+            'left' => $attributesFlyoutPosition === $modalFlyoutPosition,
+            'bottom' => $attributesFlyoutPosition === $modalFlyoutPosition,
+            default => false,
+        };
+    }
+
+    /**
      * Render the modal container.
      */
     public function render(): \Illuminate\View\View

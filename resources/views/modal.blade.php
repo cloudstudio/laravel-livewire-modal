@@ -28,7 +28,9 @@
                     x-bind:class="modalWidth"
                     class="inline-block w-full align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full "
                     id="modal-container" x-trap.noscroll="show && showActiveComponent && !modalFlyout" aria-modal="true">
-                @include('laravel-livewire-modal::modal-content')
+                        @include('laravel-livewire-modal::modal-content', [
+                            'modalFlyout' => false
+                        ])
             </div>
 
             {{-- Flyout Right --}}
@@ -43,7 +45,10 @@
                  class="fixed h-full md:w-[25rem] top-0 right-0 border-s overflow-y-auto overflow-x-hidden
                   z-50 shadow-2xl modal-flyout-right bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 transform transition-all text-left"
                  id="modal-container-right" x-trap.noscroll="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'right'" aria-modal="true">
-                @include('laravel-livewire-modal::modal-content')
+                    @include('laravel-livewire-modal::modal-content', [
+                        'modalFlyout' => true, 
+                        'modalFlyoutPosition' => 'right'
+                    ])
             </div>
 
             {{-- Flyout Left --}}
@@ -58,7 +63,10 @@
                  class="fixed h-full md:w-[25rem] top-0 left-0 border-e overflow-y-auto overflow-x-hidden 
                  z-50 shadow-2xl modal-flyout-left bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 transform transition-all text-left"
                  id="modal-container-left" x-trap.noscroll="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'left'" aria-modal="true">
-                @include('laravel-livewire-modal::modal-content')
+                    @include('laravel-livewire-modal::modal-content', [
+                        'modalFlyout' => true, 
+                        'modalFlyoutPosition' => 'left'
+                    ])
             </div>
 
             {{-- Flyout Bottom --}}
@@ -73,7 +81,10 @@
                  class="fixed min-h-[25rem] w-screen min-w-[100vw] bottom-0 left-0 right-0 border-t overflow-y-auto overflow-x-hidden
                   z-50 shadow-2xl modal-flyout-bottom bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 transform transition-all text-left"
                  id="modal-container-bottom" x-trap.noscroll="show && showActiveComponent && modalFlyout && modalFlyoutPosition === 'bottom'" aria-modal="true">
-                @include('laravel-livewire-modal::modal-content')
+                    @include('laravel-livewire-modal::modal-content', [
+                        'modalFlyout' => true, 
+                        'modalFlyoutPosition' => 'bottom'
+                    ])
             </div>
         </div>
     </div>
