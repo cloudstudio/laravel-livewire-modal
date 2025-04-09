@@ -1,5 +1,5 @@
 @foreach ($components as $id => $component)
-    @if (Modal::shouldShowModal($component['modalAttributes'], $modalFlyout, $modalFlyoutPosition))
+    @if (Modal::shouldShowModal($component['modalAttributes'], $modalFlyout, $modalFlyoutPosition ?? null))
         <div x-show.immediate="activeComponent == '{{ $id }}'" x-ref="{{ $id }}"
             wire:key="{{ $id }}">
             @livewire($component['name'], $component['arguments'], key($id))
