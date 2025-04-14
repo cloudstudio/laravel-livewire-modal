@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-livewire-modal` will be documented in this file.
 
+## v1.0.9 - 2025-04-14
+
+### What's Changed
+
+* Fix double mounted components by @Krato in https://github.com/cloudstudio/laravel-livewire-modal/pull/5
+
+**Full Changelog**: https://github.com/cloudstudio/laravel-livewire-modal/compare/v1.0.8...v1.0.9
+
 ## v1.0.8 - 2025-04-09
 
 ### What's Changed
