@@ -34,7 +34,7 @@ After installing the package, you need to include the modal component in your bl
 To properly configure Tailwind 4 with this package, add these lines to your `app.css` file:
 
 ```css
-@source '../../vendor/cloudstudio/laravel-livewire-modal/dist/modal.css';
+@import '../../vendor/cloudstudio/laravel-livewire-modal/dist/modal.css';
 ```
 
 Then run:
@@ -313,6 +313,8 @@ return [
     */
     'component_defaults' => [
         'modal_max_width' => '2xl',
+        'display_as_flyout' => false,
+        'flyout_position' => 'right',
         'close_modal_on_click_away' => true,
         'close_modal_on_escape' => true,
         'close_modal_on_escape_is_forceful' => true,

@@ -12,21 +12,29 @@ class ModalContainer extends Component
 {
     /**
      * The active component ID.
+     *
+     * @var string|null
      */
     public ?string $activeComponent = null;
 
     /**
      * The components array.
+     *
+     * @var array
      */
     public array $components = [];
 
     /**
      * The modal manager service.
+     *
+     * @var \Cloudstudio\Modal\Services\ModalManagerService|null
      */
     protected ?ModalManagerService $managerService = null;
 
     /**
      * Get the modal manager service.
+     *
+     * @return \Cloudstudio\Modal\Services\ModalManagerService
      */
     protected function managerService(): ModalManagerService
     {
@@ -39,6 +47,8 @@ class ModalContainer extends Component
 
     /**
      * Reset the state.
+     *
+     * @return void
      */
     public function resetState(): void
     {
@@ -52,6 +62,7 @@ class ModalContainer extends Component
      * @param  string  $component  The component name
      * @param  array  $arguments  The component arguments
      * @param  array  $modalAttributes  Additional modal attributes
+     * @return void
      */
     public function openModal(string $component, array $arguments = [], array $modalAttributes = []): void
     {
@@ -67,6 +78,7 @@ class ModalContainer extends Component
      * Destroy a component.
      *
      * @param  string  $id  The component ID
+     * @return void
      */
     public function destroyComponent(string $id): void
     {
@@ -75,6 +87,8 @@ class ModalContainer extends Component
 
     /**
      * Get the listeners.
+     *
+     * @return array<string, string>
      */
     public function getListeners(): array
     {
@@ -86,31 +100,43 @@ class ModalContainer extends Component
 
     /**
      * Should show modal.
+     * Checks if a modal component should be displayed based on its attributes and the container's state.
      *
-     * @param  array  $componentAttributes  The component attributes
-     * @param  bool  $modalFlyout  Whether the modal is a flyout
-     * @param  string|null  $modalFlyoutPosition  The modal flyout position
-     * @return bool Whether the modal should be shown
+     * @param  array<string, mixed>  $componentAttributes  The component attributes
+     * @param  bool  $modalFlyout  Whether the container rendering this component is a flyout.
+     * @param  string|null  $modalFlyoutPosition  The position of the flyout container ('right', 'left', 'bottom').
+     * @return bool Whether the modal should be shown.
      */
     public function shouldShowModal(array $componentAttributes, bool $modalFlyout, ?string $modalFlyoutPosition = null): bool
     {
-        // Si no es un flyout, verifica que el componente tampoco lo sea
-        if (!$modalFlyout) {
-            return !($componentAttributes['modalFlyout'] ?? false);
+        $isComponentFlyout = $componentAttributes['modalFlyout'] ?? false;
+        $componentFlyoutPosition = $componentAttributes['modalFlyoutPosition'] ?? null;
+
+        // Case 1: Standard Modal Container
+        // If the container is NOT a flyout, show the component only if it's also NOT a flyout.
+        if (! $modalFlyout) {
+            return ! $isComponentFlyout;
         }
 
-        $attributesFlyoutPosition = $componentAttributes['modalFlyoutPosition'] ?? null;
+        // Case 2: Flyout Container
+        // If the container IS a flyout, show the component only if:
+        // 1. The component itself IS ALSO a flyout.
+        // 2. Their positions match.
+        if (! $isComponentFlyout) {
+            return false; // Component is not a flyout, so don't show it in a flyout container.
+        }
 
+        // Both container and component are flyouts, check positions.
         return match ($modalFlyoutPosition) {
-            'right' => $attributesFlyoutPosition === $modalFlyoutPosition,
-            'left' => $attributesFlyoutPosition === $modalFlyoutPosition,
-            'bottom' => $attributesFlyoutPosition === $modalFlyoutPosition,
-            default => false,
+            'right', 'left', 'bottom' => $componentFlyoutPosition === $modalFlyoutPosition,
+            default => false, // Invalid or no position specified for the container.
         };
     }
 
     /**
      * Render the modal container.
+     *
+     * @return \Illuminate\View\View
      */
     public function render(): \Illuminate\View\View
     {
