@@ -5,7 +5,7 @@
         x-on:keydown.escape.window="show && closeModalOnEscape()" x-show="show" class="fixed inset-0 z-20 overflow-y-auto"
         style="display: none;">
 
-        <div class="flex items-end justify-center min-h-dvh px-4 pt-4 pb-10 text-center sm:block sm:p-0">
+        <div class="flex items-end justify-center min-h-dvh px-4 pt-4 pb-10 text-center sm:block sm:p-0 livewire-modal-wrapper">
 
             <div x-show="show" x-on:click="closeModalOnClickAway()" x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
