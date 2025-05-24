@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-livewire-modal` will be documented in this file.
 
+## v1.0.11 - 2025-05-24
+
+### What's Changed
+
+* add livewire modal wrapper by @cloudstudio in https://github.com/cloudstudio/laravel-livewire-modal/pull/7
+
+**Full Changelog**: https://github.com/cloudstudio/laravel-livewire-modal/compare/v1.0.10...v1.0.11
+
 ## v1.0.10 - 2025-04-24
 
 ### What's Changed
