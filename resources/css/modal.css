@@ -1,4 +1,4 @@
-@source '../resources/views/*.blade.php';
+@source "../resources/views/*.blade.php";
 
 /* Max Widths Classes */
 @source inline("sm:max-w-sm");
