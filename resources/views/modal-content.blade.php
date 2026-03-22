@@ -7,7 +7,3 @@
         </div>
     @endif
 @endforeach
-
-@unless (count($components))
-    <p>Something happends... we can't show the modal.</p>
-@endunless
