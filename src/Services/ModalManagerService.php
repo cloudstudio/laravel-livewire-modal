@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Reflector;
 use Livewire\Component;
-use Livewire\Mechanisms\ComponentRegistry;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -29,7 +28,7 @@ class ModalManagerService
      */
     public function createModalComponent(string $component, array $arguments = [], array $modalAttributes = []): array
     {
-        $componentClass = app(ComponentRegistry::class)->getClass($component);
+        $componentClass = app('livewire.factory')->resolveComponentClass($component);
         $reflect = new ReflectionClass($componentClass);
 
         if ($reflect->isAbstract()) {
